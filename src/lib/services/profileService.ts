@@ -17,13 +17,20 @@ export interface StudentProfile {
 export const profileService = {
   async create(data: any): Promise<StudentProfile> {
     try {
-      return await prisma.student.create({
-        data: {
+      // Use upsert to be safe during OAuth callbacks
+      return await prisma.student.upsert({
+        where: { email: data.email },
+        update: {
+          name: data.name,
+          class: data.class || 11,
+          targetYear: data.targetYear || 2027,
+        },
+        create: {
           name: data.name,
           email: data.email,
-          password: data.password || 'password123',
-          class: data.class,
-          targetYear: data.targetYear,
+          password: data.password || 'oauth_user',
+          class: data.class || 11,
+          targetYear: data.targetYear || 2027,
         }
       }) as unknown as StudentProfile;
     } catch (err: any) {
@@ -38,7 +45,10 @@ export const profileService = {
         where: { id }
       }) as unknown as StudentProfile | null;
     } catch (err: any) {
-      console.error('profileService.getById error:', err.message);
+      // Only log if it's not a missing ID
+      if (id !== 'undefined' && id !== 'null') {
+        console.error('profileService.getById error:', err.message);
+      }
       return null;
     }
   },

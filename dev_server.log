@@ -25,3 +25,8 @@
  ○ Compiling /login ...
  ✓ Compiled /login in 1587ms (707 modules)
  GET /login 200 in 1899ms
+ ✓ Compiled in 1220ms (274 modules)
+   Reload env: .env
+ ✓ Compiled in 124ms (274 modules)
+ ✓ Compiled in 183ms (288 modules)
+ ✓ Compiled in 205ms (288 modules)

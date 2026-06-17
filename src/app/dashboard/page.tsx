@@ -17,6 +17,8 @@ const Dashboard = () => {
 
     const start = async () => {
       try {
+        const cookieId = document.cookie.split("; ").find(row => row.startsWith("studentId="))?.split("=")[1];
+        if (cookieId) localStorage.setItem("studentId", cookieId);
         const savedId = localStorage.getItem('studentId');
         let currentId = savedId;
 
