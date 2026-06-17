@@ -1,0 +1,55 @@
+
+> frontend@0.1.0 dev /app
+> next dev
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 3.9s (629 modules)
+ GET /dashboard 200 in 5255ms
+ ○ Compiling /api/student/register ...
+ ✓ Compiled /api/student/register in 1103ms (681 modules)
+◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+Registering student: demo_1781667736291@example.com
+ GET /dashboard 200 in 548ms
+Student created: 696e9277-d3c1-4855-9cc3-258cfad8df32
+Plan generated for day: 2026-06-17
+Plan saved.
+ POST /api/student/register 200 in 5008ms
+ ○ Compiling /chapter/[name] ...
+ ✓ Compiled /chapter/[name] in 796ms (676 modules)
+ GET /chapter/The%20Living%20World 200 in 1982ms
+ ○ Compiling /api/chapter/[name] ...
+ ✓ Compiled /api/chapter/[name] in 947ms (678 modules)
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+ GET /api/chapter/The%2520Living%2520World?studentId=696e9277-d3c1-4855-9cc3-258cfad8df32 200 in 1392ms
+ GET /dashboard 200 in 1206ms
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+ ✓ Compiled /api/plan/today in 343ms (680 modules)
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+ GET /api/plan/today?studentId=696e9277-d3c1-4855-9cc3-258cfad8df32 200 in 1985ms
+ ✓ Compiled /test in 437ms (687 modules)
+ GET /test?chapter=The+Living+World 200 in 561ms
+ ✓ Compiled /api/test/submit in 338ms (690 modules)
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+Handling TEST_RESULT_RECEIVED for student 696e9277-d3c1-4855-9cc3-258cfad8df32
+ POST /api/test/submit 200 in 2684ms
+ GET /dashboard 200 in 108ms
+ GET /api/plan/today?studentId=696e9277-d3c1-4855-9cc3-258cfad8df32 200 in 270ms
+ GET /api/plan/today?studentId=696e9277-d3c1-4855-9cc3-258cfad8df32 200 in 240ms
+ ✓ Compiled /calendar in 456ms (697 modules)
+ GET /calendar 200 in 568ms
+ GET /dashboard 200 in 240ms
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+ GET /api/plan/today?studentId=696e9277-d3c1-4855-9cc3-258cfad8df32 200 in 1590ms
+ ✓ Compiled /api/mentor/chat in 412ms (701 modules)
+◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+ POST /api/mentor/chat 200 in 5225ms
+ ✓ Compiled in 737ms (251 modules)
+ ✓ Compiled in 247ms (251 modules)
+ ✓ Compiled in 273ms (251 modules)
