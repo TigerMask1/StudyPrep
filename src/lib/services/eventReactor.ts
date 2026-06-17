@@ -1,4 +1,4 @@
-import { query, exec } from '../config/database';
+import { query } from '../config/database';
 import { planGenerator } from './planGenerator';
 import { profileService } from './profileService';
 
@@ -20,6 +20,8 @@ export const eventReactor = {
     }
 
     const student = await profileService.getById(studentId);
+    if (!student) throw new Error('Student not found during test result processing');
+
     const todayAtom = await planGenerator.generateDay(student, new Date());
 
     todayAtom.practice_slots.push({

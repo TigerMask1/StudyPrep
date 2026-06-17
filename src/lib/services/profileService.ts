@@ -3,64 +3,54 @@ import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 
 export interface StudentProfile {
-  id?: string;
+  id: string;
   name: string;
   email: string;
   password?: string;
   class: number;
   targetYear: number;
   programmeStartDate?: Date;
-  medium?: string;
-  schoolHours?: any;
   availableHoursSchool?: number;
   availableHoursWeekend?: number;
-  studyPreference?: string;
 }
 
 export const profileService = {
-  async create(profile: StudentProfile) {
-    const id = profile.id || uuidv4();
-    const hashedPassword = await bcrypt.hash(profile.password || 'default_pass', 10);
-
+  async create(data: any): Promise<StudentProfile> {
+    const id = uuidv4();
+    const hashedPassword = await bcrypt.hash(data.password || 'password123', 10);
     const sql = `
-      INSERT INTO "Student" (
-        "id", "name", "email", "password", "class", "targetYear",
-        "medium", "availableHoursSchool", "availableHoursWeekend", "studyPreference"
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO "Student" ("id", "name", "email", "password", "class", "targetYear", "programmeStartDate", "updatedAt")
+      VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
       RETURNING *;
     `;
-    const params = [
-      id, profile.name, profile.email, hashedPassword,
-      profile.class, profile.targetYear, profile.medium || 'English',
-      profile.availableHoursSchool || 4.5, profile.availableHoursWeekend || 9.0,
-      profile.studyPreference || 'mixed'
-    ];
-    const result = await query(sql, params);
-    return result.rows[0];
-  },
-
-  async getById(id: string) {
-    const sql = 'SELECT * FROM "Student" WHERE "id" = $1';
-    const result = await query(sql, [id]);
-    return result.rows[0];
-  },
-
-  async getByEmail(email: string) {
-    const sql = 'SELECT * FROM "Student" WHERE "email" = $1';
-    const result = await query(sql, [email]);
-    return result.rows[0];
-  },
-
-  async update(id: string, updates: Partial<StudentProfile>) {
-    const fields = Object.keys(updates);
-    if (fields.includes('password')) {
-      updates.password = await bcrypt.hash(updates.password!, 10);
+    try {
+      const result = await query(sql, [id, data.name, data.email, hashedPassword, data.class, data.targetYear]);
+      return result.rows[0];
+    } catch (err: any) {
+      console.error('profileService.create error:', err.message);
+      throw err;
     }
+  },
 
-    const setClause = fields.map((f, i) => `"${f}" = $${i + 2}`).join(', ');
-    const sql = `UPDATE "Student" SET ${setClause}, "updatedAt" = CURRENT_TIMESTAMP WHERE "id" = $1 RETURNING *`;
-    const params = [id, ...Object.values(updates)];
-    const result = await query(sql, params);
-    return result.rows[0];
+  async getById(id: string): Promise<StudentProfile | null> {
+    const sql = 'SELECT * FROM "Student" WHERE "id" = $1';
+    try {
+      const result = await query(sql, [id]);
+      return result.rows[0] || null;
+    } catch (err: any) {
+      console.error('profileService.getById error:', err.message);
+      return null;
+    }
+  },
+
+  async getByEmail(email: string): Promise<StudentProfile | null> {
+    const sql = 'SELECT * FROM "Student" WHERE "email" = $1';
+    try {
+      const result = await query(sql, [email]);
+      return result.rows[0] || null;
+    } catch (err: any) {
+      console.error('profileService.getByEmail error:', err.message);
+      return null;
+    }
   }
 };

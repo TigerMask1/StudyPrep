@@ -1,0 +1,11 @@
+
+> frontend@0.1.0 start /app
+> next start
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+[Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id]
+ ELIFECYCLE  Command failed with exit code 1.

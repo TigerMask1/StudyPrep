@@ -1,0 +1,65 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.1s
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1922ms (615 modules)
+ GET /dashboard 200 in 3494ms
+ ○ Compiling /api/student/register ...
+ ✓ Compiled /api/student/register in 1154ms (667 modules)
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[API/Register] email: aspirant_1781676810537@neetmentor.ai
+[API/Register] New student created: abfa9ee5-6a56-4cc5-b003-b348f24f139b
+ POST /api/student/register 200 in 4044ms
+ ○ Compiling /chapter/[name] ...
+ ✓ Compiled /chapter/[name] in 718ms (676 modules)
+ GET /chapter/Biological%20Classification 200 in 2368ms
+ ✓ Compiled /api/chapter/[name] in 484ms (678 modules)
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+ GET /api/chapter/Biological%2520Classification?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 3143ms
+ GET /api/chapter/Biological%2520Classification?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 244ms
+ GET /dashboard 200 in 164ms
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+ ✓ Compiled /api/plan/today in 482ms (680 modules)
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+ GET /api/plan/today?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 2197ms
+ GET /api/plan/today?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 244ms
+ ✓ Compiled /test in 433ms (687 modules)
+ GET /test?chapter=The+Living+World 200 in 549ms
+ ✓ Compiled /api/test/submit in 338ms (690 modules)
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+Handling TEST_RESULT_RECEIVED for student abfa9ee5-6a56-4cc5-b003-b348f24f139b
+ POST /api/test/submit 200 in 2665ms
+ GET /dashboard 200 in 84ms
+ GET /api/plan/today?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 247ms
+ GET /api/plan/today?studentId=abfa9ee5-6a56-4cc5-b003-b348f24f139b 200 in 241ms
+ ✓ Compiled /calendar in 388ms (697 modules)
+ GET /calendar 200 in 492ms
+ GET /dashboard 200 in 328ms
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API/Register] email: aspirant_1781676901089@neetmentor.ai
+[API/Register] New student created: 9c52dfec-e161-4f52-97a9-8680766341f2
+ POST /api/student/register 200 in 2556ms
+ GET /chapter/Biological%20Classification 200 in 98ms
+ GET /api/chapter/Biological%2520Classification?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 288ms
+ GET /dashboard 200 in 64ms
+ GET /api/chapter/Biological%2520Classification?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 261ms
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+ GET /api/plan/today?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 1621ms
+ GET /api/plan/today?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 248ms
+ GET /test?chapter=The+Living+World 200 in 70ms
+Handling TEST_RESULT_RECEIVED for student 9c52dfec-e161-4f52-97a9-8680766341f2
+ POST /api/test/submit 200 in 946ms
+ GET /dashboard 200 in 47ms
+ GET /api/plan/today?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 260ms
+ GET /api/plan/today?studentId=9c52dfec-e161-4f52-97a9-8680766341f2 200 in 242ms
+ GET /calendar 200 in 66ms
+[?25h

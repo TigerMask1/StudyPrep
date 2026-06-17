@@ -1,4 +1,4 @@
-import { query } from './src/lib/config/database.ts';
+import { query } from '../src/lib/config/database.ts';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,15 +22,33 @@ const neetSyllabus = [
     commonErrors: ['Wrong kingdom for Cyanobacteria'],
     ncertRef: { book: 'Biology Class 11', chapter: 2, pages: '16-30' }
   },
+  {
+    id: 'BIO_11_U3_CH8_T1',
+    name: 'Cell: The Unit of Life - Prokaryotic Cell',
+    subject: 'Biology', class: 11, unit: 'Cell: Structure & Function', chapter: 'Cell: The Unit of Life', topic: 'Cell Types',
+    pyqFrequency: 5, difficulty: 2,
+    keyPoints: ['Cell theory by Schleiden and Schwann', 'Prokaryotic cells lack membrane-bound nucleus', 'Mesosomes and inclusion bodies'],
+    commonErrors: ['Confusing cell wall composition in Monera vs Fungi'],
+    ncertRef: { book: 'Biology Class 11', chapter: 8, pages: '125-135' }
+  },
   // PHYSICS - CLASS 11
   {
-    id: 'PHY_11_U1_CH1_T1',
+    id: 'PHY_11_U1_CH2_T1',
     name: 'Units and Measurements - Error Analysis',
     subject: 'Physics', class: 11, unit: 'Physical World and Measurement', chapter: 'Units and Measurements', topic: 'Errors',
     pyqFrequency: 5, difficulty: 2,
     keyPoints: ['Absolute error, Relative error, Percentage error', 'Combination of errors in arithmetic operations', 'Significant figures rules'],
     commonErrors: ['Incorrect addition of relative errors in product'],
     ncertRef: { book: 'Physics Class 11', chapter: 2, pages: '16-35' }
+  },
+  {
+    id: 'PHY_11_U2_CH3_T1',
+    name: 'Motion in a Straight Line - Kinematics Equations',
+    subject: 'Physics', class: 11, unit: 'Kinematics', chapter: 'Motion in a Straight Line', topic: 'Equations of Motion',
+    pyqFrequency: 4, difficulty: 1,
+    keyPoints: ['v = u + at', 's = ut + 1/2at^2', 'v^2 = u^2 + 2as'],
+    commonErrors: ['Forgetting to check sign of acceleration'],
+    ncertRef: { book: 'Physics Class 11', chapter: 3, pages: '40-55' }
   },
   // CHEMISTRY - CLASS 11
   {
@@ -41,9 +59,16 @@ const neetSyllabus = [
     keyPoints: ['1 mole = 6.022 x 10^23 entities', 'Molar mass and Avogadro number', 'Stoichiometry and limiting reagent'],
     commonErrors: ['Confusing molarity with molality'],
     ncertRef: { book: 'Chemistry Class 11', chapter: 1, pages: '1-25' }
+  },
+  {
+    id: 'CHEM_11_U2_CH2_T1',
+    name: 'Structure of Atom - Bohr Model',
+    subject: 'Chemistry', class: 11, unit: 'Structure of Atom', chapter: 'Structure of Atom', topic: 'Atomic Models',
+    pyqFrequency: 5, difficulty: 2,
+    keyPoints: ['Postulates of Bohr model', 'Energy of orbits and hydrogen spectrum', 'Quantum numbers and electron configuration'],
+    commonErrors: ['Violating Hunds rule in configuration'],
+    ncertRef: { book: 'Chemistry Class 11', chapter: 2, pages: '30-60' }
   }
-  // Note: In a production build, I would include all 1000+ subtopics.
-  // For this demonstration, I'm seeding representative high-weightage topics across all subjects.
 ];
 
 async function seed() {
