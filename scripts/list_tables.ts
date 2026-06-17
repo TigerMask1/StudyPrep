@@ -1,13 +1,14 @@
 import { query } from '../src/lib/config/database';
-import dotenv from 'dotenv';
-dotenv.config();
 
-async function list() {
-  try {
-    const res = await query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
-    console.log("Tables:", res.rows.map(r => r.table_name));
-  } catch (err) {
-    console.error(err);
+async function main() {
+  const tables = await query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
+  for (const row of tables.rows) {
+    console.log("Table:", row.table_name);
+    const columns = await query(`SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${row.table_name}'`);
+    for (const col of columns.rows) {
+      console.log(`  - ${col.column_name} (${col.data_type})`);
+    }
   }
 }
-list();
+
+main().catch(console.error);

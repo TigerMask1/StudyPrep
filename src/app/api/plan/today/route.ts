@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { query } from '@/lib/config/database';
+import { PrismaClient } from '@prisma/client';
 import { planGenerator } from '@/lib/services/planGenerator';
 import { profileService } from '@/lib/services/profileService';
+
+const prisma = new PrismaClient();
 
 export async function GET(req: Request) {
   try {
@@ -13,14 +15,18 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'Valid studentId required' }, { status: 400 });
     }
 
-    // Use date cast for robustness
-    const result = await query(
-      'SELECT * FROM "PlanAtom" WHERE "studentId" = $1 AND "date"::date = $2::date',
-      [studentId, dateStr]
-    );
+    const date = new Date(dateStr);
+    const existing = await prisma.planAtom.findUnique({
+      where: {
+        studentId_date: {
+          studentId,
+          date
+        }
+      }
+    });
 
-    if (result.rows.length > 0) {
-      return NextResponse.json(result.rows[0].data);
+    if (existing) {
+      return NextResponse.json(existing.data);
     }
 
     const student = await profileService.getById(studentId);
@@ -28,7 +34,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'Student profile not found. Please re-register.' }, { status: 404 });
     }
 
-    const newPlan = await planGenerator.generateDay(student, new Date(dateStr));
+    const newPlan = await planGenerator.generateDay(student, date);
     await planGenerator.savePlanAtom(studentId, newPlan);
 
     return NextResponse.json(newPlan);

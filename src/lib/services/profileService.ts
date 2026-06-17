@@ -1,6 +1,6 @@
-import { query } from '../config/database';
-import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcryptjs';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export interface StudentProfile {
   id: string;
@@ -16,16 +16,16 @@ export interface StudentProfile {
 
 export const profileService = {
   async create(data: any): Promise<StudentProfile> {
-    const id = uuidv4();
-    const hashedPassword = await bcrypt.hash(data.password || 'password123', 10);
-    const sql = `
-      INSERT INTO "Student" ("id", "name", "email", "password", "class", "targetYear", "programmeStartDate", "updatedAt")
-      VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-      RETURNING *;
-    `;
     try {
-      const result = await query(sql, [id, data.name, data.email, hashedPassword, data.class, data.targetYear]);
-      return result.rows[0];
+      return await prisma.student.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          password: data.password || 'password123',
+          class: data.class,
+          targetYear: data.targetYear,
+        }
+      }) as unknown as StudentProfile;
     } catch (err: any) {
       console.error('profileService.create error:', err.message);
       throw err;
@@ -33,10 +33,10 @@ export const profileService = {
   },
 
   async getById(id: string): Promise<StudentProfile | null> {
-    const sql = 'SELECT * FROM "Student" WHERE "id" = $1';
     try {
-      const result = await query(sql, [id]);
-      return result.rows[0] || null;
+      return await prisma.student.findUnique({
+        where: { id }
+      }) as unknown as StudentProfile | null;
     } catch (err: any) {
       console.error('profileService.getById error:', err.message);
       return null;
@@ -44,10 +44,10 @@ export const profileService = {
   },
 
   async getByEmail(email: string): Promise<StudentProfile | null> {
-    const sql = 'SELECT * FROM "Student" WHERE "email" = $1';
     try {
-      const result = await query(sql, [email]);
-      return result.rows[0] || null;
+      return await prisma.student.findUnique({
+        where: { email }
+      }) as unknown as StudentProfile | null;
     } catch (err: any) {
       console.error('profileService.getByEmail error:', err.message);
       return null;
